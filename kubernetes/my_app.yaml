@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  namespace: <USER_ID>
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - image: <REGISTRY>/techx/container-demo/demoapp:v1
+        imagePullPolicy: IfNotPresent
+        name: my-app
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "12Mi"
+            cpu: "25m"
+          limits:
+            memory: "48Mi"
+            cpu: "50m"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+    cert-manager.io/common-name: <USER_ID>.np-shared.shw-oke.com
+  name: my-app-ingress
+  namespace: <USER_ID>
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: <USER_ID>.np-shared.shw-oke.com
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: my-app
+            port:
+              number: 5000
+  tls:
+  - hosts:
+    - <USER_ID>.np-shared.shw-oke.com
+    secretName: my-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app
+  namespace: <USER_ID>
+spec:
+  ports:
+  - name: my-app 
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: my-app
+  type: ClusterIP
