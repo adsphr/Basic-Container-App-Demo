@@ -6,12 +6,12 @@ On Mac or Linux, open application "terminal" or "iTerm"
 run command `git clone https://github.com/njk187/Basic-Container-App-Demo.git`   
 run command `cd Basic-Container-App-Demo`   
 
-On Windows, open application "powershell"   
+On Windows, open application "PowerShell"   
 run command `git clone https://github.com/njk187/Basic-Container-App-Demo.git`   
 run command `cd Basic-Container-App-Demo`   
 
 ## Login to Rancher and Obtain KubeConfig
-1. Navigate to the URL provided by your instructure and then click "Log in with AzureAD"
+1. Navigate to the URL provided by your instructor and then click "Log in with AzureAD"
 ![rancher login](/readme_images/image.png)
 2. Click on K8s cluster "np-shared-oke"
 ![k8s cluster](/readme_images/image-1.png)
@@ -24,7 +24,7 @@ On Mac or Linux
 run command `export KUBECONFIG=~/Downloads/np-shared-oke.yaml`   
 
 On Windows   
-run command `$env:KUBECONFIG = "C:\Users\<USER_ID>\Downloads\np-shared-oke.yaml`   
+run command `$env:KUBECONFIG = "$env:USERPROFILE\Downloads\np-shared-oke.yaml"`   
 
 ## Configure YAML Files for Deployment
 1. Open file `./kubernetes/my_namespace.yaml`   
