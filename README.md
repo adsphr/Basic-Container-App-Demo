@@ -41,7 +41,7 @@ run command `$env:KUBECONFIG = "$env:USERPROFILE\Downloads\np-shared-oke.yaml"`
 
 ## Deploy!
 On Mac or Linux   
-run command `kubectl apply -f ./kubernetes/my_namespace.yaml && kubectl apply -f ./kubernetes/my_app.yaml`   
+run command `kubectl create -f ./kubernetes/my_namespace.yaml && kubectl apply -f ./kubernetes/my_app.yaml`   
 
 On Windows   
 run command
