@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app-deployment
-  namespace: <USER_ID>
+  namespace: adsphr
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,7 @@ spec:
         app: my-app
     spec:
       containers:
-      - image: <REGISTRY>/techx/container-demo/demoapp:v1
+      - image: docker.artifactory.sherwin.com/techx/container-demo/demoapp:v3
         imagePullPolicy: IfNotPresent
         name: my-app
         ports:
@@ -32,13 +32,13 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: vault-issuer
-    cert-manager.io/common-name: <USER_ID>.np-shared.shw-oke.com
+    cert-manager.io/common-name: adsphr.np-shared.shw-oke.com
   name: my-app-ingress
-  namespace: <USER_ID>
+  namespace: adsphr
 spec:
   ingressClassName: nginx
   rules:
-  - host: <USER_ID>.np-shared.shw-oke.com
+  - host: adsphr.np-shared.shw-oke.com
     http:
       paths:
       - path: /
@@ -50,14 +50,14 @@ spec:
               number: 5000
   tls:
   - hosts:
-    - <USER_ID>.np-shared.shw-oke.com
+    - adsphr.np-shared.shw-oke.com
     secretName: my-app
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: my-app
-  namespace: <USER_ID>
+  namespace: adsphr
 spec:
   ports:
   - name: my-app 

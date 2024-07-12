@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   annotations:
     field.cattle.io/projectId: c-m-vf7r24cr:p-z6pxg
-  name: <USER_ID>
+  name: adsphr
